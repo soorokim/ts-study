@@ -193,3 +193,68 @@ const params: Params = [0, "hi"];
 type Return = ReturnType<typeof testFn>;
 
 type RichToast = Required<Toast>;
+
+const aObject = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
+
+// type RecordType = Record<keyof typeof aObject, number> & { zzzz: string };
+// type IndexSignature = {
+//   [key in keyof typeof aObject]: number;
+// };
+
+// type RecordType = Record<string, number>;
+// type IndexSignature = {
+//   [key: string]: number;
+// };
+
+type TestA = number[];
+type TestA2 = Array<number>;
+
+// type Teee<T> = {
+//   test: T;
+// };
+
+// interface Tesst extends Teee<number> {}
+
+type A = {
+  [key in string]: number | string;
+};
+
+const aa: A = {
+  age: 0,
+};
+
+aa.email = "test";
+
+const numberArray = [1, 2, 3, 4, 5, 6, 7] as const;
+
+type Indexed = (typeof numberArray)[number];
+
+// const test = 1;
+const test = "hi";
+
+type TestType = typeof test;
+
+const test1 = { key: "alt", id: 10 } as const;
+
+type Test1Type = typeof test1;
+
+const msgbox = (msg: string) => msg;
+// type MsgBoxReturnType =  typeof msgbox("Are you sure you want to continue?")
+
+type Getters<Type> = {
+  [Property in keyof Type as `get${Capitalize<
+    string & Property
+  >}`]: () => Type[Property];
+};
+
+interface Person {
+  name: string;
+  age: number;
+  location: string;
+}
+
+type LazyPerson = Getters<Person>;
